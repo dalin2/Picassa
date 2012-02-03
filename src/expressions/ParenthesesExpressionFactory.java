@@ -18,12 +18,21 @@ public class ParenthesesExpressionFactory extends ExpressionFactory {
     static {
         commandToExpression.put("color", new ColorParenExpression());
         commandToExpression.put("div", new DivideParenExpression());
+        commandToExpression.put("/", new DivideParenExpression());
         commandToExpression.put("exp", new ExponentParenExpression());
+        commandToExpression.put("^", new ExponentParenExpression());
         commandToExpression.put("minus", new MinusParenExpression());
+        commandToExpression.put("-", new MinusParenExpression());
         commandToExpression.put("mod", new ModulusParenExpression());
+        commandToExpression.put("%", new ModulusParenExpression());
         commandToExpression.put("mul", new MultiplyParenExpression());
+        commandToExpression.put("*", new MultiplyParenExpression());
+        commandToExpression.put("product", new ProductParenExpression());
         commandToExpression.put("neg", new NegateParenExpression());
+        commandToExpression.put("!", new NegateParenExpression());
         commandToExpression.put("plus", new PlusParenExpression());
+        commandToExpression.put("+", new PlusParenExpression());
+        commandToExpression.put("sum", new SumParenExpression());
         commandToExpression.put("random", new RandomParenExpression());
         commandToExpression.put("floor", new FloorParenExpression());
         commandToExpression.put("ceil", new CeilingParenExpression());
@@ -40,12 +49,16 @@ public class ParenthesesExpressionFactory extends ExpressionFactory {
         commandToExpression.put("perlinColor", new PerlinColorParenExpression());
         commandToExpression.put("perlinBW", new PerlinBlackWhiteParenExpression());
         commandToExpression.put("let", new LetExpression());
+        commandToExpression.put("average", new AverageParenExpression());
+        commandToExpression.put("if", new ConditionalParenExpression());
+        commandToExpression.put("min", new MinimumParenExpression());
+        commandToExpression.put("max", new MaximumParenExpression());
     }
     
     // expression begins with a left paren followed by the command name, 
     // which is a sequence of alphabetic characters
     private static final Pattern EXPRESSION_BEGIN_REGEX =
-        Pattern.compile("\\(([a-zA-Z]+)");
+        Pattern.compile("\\(([a-zA-Z\\+\\-\\/\\*\\^\\%\\!]+)");
                     
     public boolean isThisKindOfExpression(String input, int position) {
     	Matcher expMatcher = EXPRESSION_BEGIN_REGEX.matcher(input.substring(position));

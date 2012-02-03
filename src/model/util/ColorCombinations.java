@@ -1,5 +1,7 @@
 package model.util;
 
+import java.util.ArrayList;
+
 import model.RGBColor;
 
 
@@ -22,6 +24,18 @@ public class ColorCombinations
                             left.getGreen() + right.getGreen(),
                             left.getBlue() + right.getBlue());
     }
+    
+    public static RGBColor sum (ArrayList<RGBColor> colors) {
+        double red = 0;
+        double green = 0;
+        double blue = 0;
+        for (RGBColor color: colors) {
+            red += color.getRed();
+            green += color.getGreen();
+            blue += color.getBlue();
+        }
+        return new RGBColor(red, green, blue);
+    }
 
     /**
      * Combine two colors by subtracting their components.
@@ -39,6 +53,18 @@ public class ColorCombinations
         return new RGBColor(left.getRed() * right.getRed(), 
                             left.getGreen() * right.getGreen(),
                             left.getBlue() * right.getBlue());
+    }
+    
+    public static RGBColor product (ArrayList<RGBColor> colors) {
+        double red = 1;
+        double green = 1;
+        double blue = 1;
+        for (RGBColor color: colors) {
+            red *= color.getRed();
+            green *= color.getGreen();
+            blue *= color.getBlue();
+        }
+        return new RGBColor(red, green, blue);
     }
 
     /**
@@ -127,4 +153,47 @@ public class ColorCombinations
                 Math.log(left.getGreen()),
                 Math.log(left.getBlue()));
     }
+    
+    public static RGBColor average(ArrayList<RGBColor> colors) {
+        int length = colors.size();
+        double red = 0;
+        double green = 0;
+        double blue = 0;
+        for (RGBColor color: colors) {
+            red += color.getRed();
+            green += color.getGreen();
+            blue += color.getBlue();
+        }
+        return new RGBColor(red/length, green/length, blue/length);
+    }
+    
+    public static RGBColor minimum(ArrayList<RGBColor> colors) {
+        RGBColor firstColor = colors.get(0);
+        double minValue = firstColor.getRed() + firstColor.getGreen() + firstColor.getBlue();
+        RGBColor minColor = firstColor;
+        for (RGBColor color: colors) {
+            double colorValue = color.getRed() + color.getGreen() + color.getBlue();
+            if (colorValue < minValue) {
+                minValue = colorValue;
+                minColor = color;
+            }
+        }
+        return minColor;
+    }
+    
+    
+    public static RGBColor maximum(ArrayList<RGBColor> colors) {
+        RGBColor firstColor = colors.get(0);
+        double maxValue = firstColor.getRed() + firstColor.getGreen() + firstColor.getBlue();
+        RGBColor maxColor = firstColor;
+        for (RGBColor color: colors) {
+            double colorValue = color.getRed() + color.getGreen() + color.getBlue();
+            if (colorValue > maxValue) {
+                maxValue = colorValue;
+                maxColor = color;
+            }
+        }
+        return maxColor;
+    }
+
 }
