@@ -25,6 +25,8 @@ public class VariableExpressionFactory extends ExpressionFactory {
         if (variableMatch.equals("x") || variableMatch.equals("y")) {
             return new CoordinateExpression(variableMatch);
         }
+        else if (variableMatch.equals("t"))
+            return new AnimationExpression();
         return new VariableExpression(variableMatch);
 	}
 

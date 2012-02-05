@@ -14,9 +14,31 @@ public class Model
 {
     public static final double DOMAIN_MIN = -1;
     public static final double DOMAIN_MAX = 1;
+    public static final int NUM_FRAMES = 50;
 
+    private static double myCurrentTime = 0;
+    
     private static double evalX;
     private static double evalY;
+
+
+    /**
+     * Advance to the next frame in the animation.
+     */
+    public void reset ()
+    {
+        myCurrentTime = 0;
+    }
+
+
+    /**
+     * Advance to the next frame in the animation.
+     */
+    public void nextFrame ()
+    {
+        myCurrentTime += 1.0 / NUM_FRAMES;
+    }
+
 
     /**
      * Evaluate an expression for each point in the image.
@@ -34,7 +56,7 @@ public class Model
             {
                 evalX = imageToDomainScale(imageX, size.width);
                 result.setColor(imageX, imageY,
-                                toEval.evaluate().toJavaColor());
+                        toEval.evaluate().toJavaColor());
             }
         }
         return result;
@@ -51,10 +73,14 @@ public class Model
     }
     
     public static double getEvalX() {
-    	return evalX;
+        return evalX;
     }
     
     public static double getEvalY() {
-    	return evalY;
+        return evalY;
+    }
+    
+    public static double getEvalT() {
+        return myCurrentTime*2 - 1;
     }
 }
