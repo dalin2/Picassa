@@ -23,8 +23,8 @@ import expressions.ParenthesesExpressionFactory;
 public class Parser
 {
     // state of the parser
-    protected int myCurrentPosition;
-    protected String myInput;
+    private int myCurrentPosition;
+    private String myInput;
     
     public int getCurrentPosition() {
     	return myCurrentPosition;
